@@ -1,0 +1,416 @@
+@media only screen and (min-width: 1920px) and (max-width: 2400px) {
+  .chat-height {
+    height: calc(100vh - 13em);
+  }
+}
+@media only screen and (min-width: 1500px) and (max-width: 1900px) {
+  .chat-height {
+    height: calc(100vh - 13em);
+  }
+}
+@media only screen and (min-width: 1500px) and (max-width: 1919px) {
+  .chat-height {
+    height: calc(100vh - 13em);
+  }
+}
+@media only screen and (min-width: 1301px) and (max-width: 1500px) {
+  .chat-height {
+    height: calc(100vh - 13em);
+  }
+}
+@media only screen and (min-width: 1100px) and (max-width: 1300px) {
+  .chat-height {
+    height: calc(100vh - 13em);
+  }
+}
+@media only screen and (max-width: 992px) {
+  body {
+    background: 0 0 !important;
+  }
+  .chat-box {
+    width: 100%;
+  }
+}
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+  .chat-box {
+    width: 100%;
+    float: left;
+  }
+  #card-tbl table {
+    border: 0;
+  }
+  #card-tbl table thead {
+    display: none;
+  }
+  #card-tbl table tr {
+    margin-bottom: 10px;
+    border-bottom: 2px solid #ddd;
+    background-color: #fff;
+    width: 49%;
+    margin-right: 1%;
+    float: left;
+  }
+  #card-tbl table td {
+    display: block;
+    text-align: right;
+    font-size: 13px;
+  }
+  #card-tbl table td:before {
+    content: attr(data-label);
+    float: left;
+    font-weight: 700;
+  }
+  .mob-bgtbl {
+    background-color: #eff3f8 !important;
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  .tab-100 {
+    width: 100%;
+  }
+  .tab-pad10 {
+    padding: 10px !important;
+  }
+  .margin-t4 {
+    margin-top: 20px;
+  }
+  .loan-amt-box {
+    margin-top: 10px;
+  }
+  .header-2 #navigation > ul > li > a {
+    padding: 12px 14px;
+  }
+  #btn-chat a.btn {
+    line-height: 15px;
+  }
+  .section-space40 {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  .icon-svg-1x {
+    width: 44px;
+  }
+  .section-space80 {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+  .cta {
+    padding: 30px 0;
+  }
+  .mb30 {
+    margin-bottom: 15px;
+  }
+  .mb60 {
+    margin-bottom: 30px;
+  }
+  .section-space80 {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+  .img-center {
+    margin: 10px auto;
+  }
+  .tab-margt-10 {
+    margin-top: 10px !important;
+  }
+  .tab-margt-0 {
+    margin-top: 0 !important;
+  }
+  .page-header {
+    padding: 50px 0 80px;
+  }
+  .loan-amt-box .loan-amt {
+    margin-bottom: 5px;
+    margin-top: 5px;
+  }
+  .chat-arrbox {
+    float: left;
+    width: 10%;
+  }
+  .chat-box {
+    width: 90%;
+  }
+  #card-tbl table {
+    border: 0;
+  }
+  #card-tbl table thead {
+    display: none;
+  }
+  #card-tbl table tr {
+    margin-bottom: 10px;
+    display: block;
+    border-bottom: 2px solid #ddd;
+    background-color: #fff;
+  }
+  #card-tbl table td {
+    display: block;
+    text-align: right;
+    font-size: 13px;
+  }
+  #card-tbl table td:before {
+    content: attr(data-label);
+    float: left;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .mob-bgtbl {
+    background-color: #eff3f8 !important;
+  }
+  .chbtm-icon {
+    width: 44px;
+    height: 44px;
+    line-height: 40px;
+    margin-top: 4px;
+  }
+}
+@media only screen and (min-width: 0px) and (max-width: 767px) {
+  .header-action .btn-default {
+    padding: 10px 12px;
+  }
+  .mob-foot-pad {
+    padding-top: 25px;
+  }
+  .logotext {
+    font-size: 28px;
+  }
+  .logotext1 {
+    font-size: 20px;
+  }
+  .mob-wid100 {
+    width: 100%;
+  }
+  .mob-foot-line {
+    line-height: 15px;
+  }
+  .mob-float-left {
+    float: left !important;
+  }
+  .mob-main {
+    width: 100%;
+    float: left;
+  }
+  .mob-mrgt-10 {
+    margin-top: 10px !important;
+  }
+  .mob-margt-0 {
+    margin-top: 0 !important;
+  }
+  .mob-margl-0 {
+    margin-left: 0;
+  }
+  .carousel-inner .item p.slider-text {
+    font-size: 12px;
+  }
+  .rate-title {
+    font-size: 13px;
+  }
+  .rate-counter-block {
+    border-right: none;
+  }
+  #btn-chat a.btn {
+    line-height: 15px;
+  }
+  .section-space40 {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  .icon-svg-1x {
+    width: 44px;
+  }
+  .section-space80 {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+  .cta {
+    padding: 30px 0;
+  }
+  .mb30 {
+    margin-bottom: 15px;
+  }
+  .mb60 {
+    margin-bottom: 30px;
+  }
+  .section-space80 {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+  .img-center {
+    margin: 10px auto;
+  }
+  .textcenter-mo {
+    text-align: center !important;
+  }
+  .mt10-mo {
+    margin-top: 10px;
+  }
+  .mob-btm-0 {
+    margin-bottom: 0;
+  }
+  .mob-bot-pad-0 {
+    padding: 0;
+  }
+  .txt-align-amount {
+    text-align: left;
+  }
+  .mob-downchat-btn {
+    border-top: 1px solid #ffffff14;
+    padding-top: 5px;
+    margin-top: 5px;
+  }
+  .card-content {
+    margin-top: 5px;
+  }
+  #btn-chat1 a.btn-default {
+    line-height: 16px;
+  }
+  .amt-text {
+    float: left;
+  }
+  #card-tbl table {
+    border: 0;
+  }
+  #card-tbl table thead {
+    display: none;
+  }
+  #card-tbl table tr {
+    margin-bottom: 10px;
+    display: block;
+    border-bottom: 2px solid #ddd;
+    background-color: #fff;
+  }
+  #card-tbl table td {
+    display: block;
+    text-align: right;
+    font-size: 13px;
+  }
+  #card-tbl table td:before {
+    content: attr(data-label);
+    float: left;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .mob-bgtbl {
+    background-color: #eff3f8 !important;
+  }
+  .mob-d-td {
+    display: block;
+  }
+  .mob-bg-white {
+    background-color: #fff !important;
+  }
+  .pinside20 {
+    padding: 8px;
+  }
+  .loan-amt-box .loan-amt {
+    margin-bottom: 7px;
+    margin-top: 7px;
+  }
+  .btm-txbx {
+    margin: 0 auto;
+    display: table;
+    width: 80%;
+    padding-top: 20px;
+  }
+  .chat-box {
+    width: 95%;
+    float: left;
+  }
+  .chat-arrbox {
+    float: left;
+    width: 5%;
+  }
+  .pad-r-n {
+    padding: 0;
+  }
+  .chat-type {
+    padding-right: 83px;
+  }
+  .chat-backarrow i {
+    line-height: 34px;
+    font-size: 18px;
+  }
+  .chat-backarrow {
+    width: 34px;
+    height: 34px;
+    margin-top: 9px;
+  }
+  .chat-sendbtn {
+    right: 0;
+  }
+  .mob-chtside-btn {
+    margin: 0 auto;
+    display: table;
+    float: none !important;
+    padding-top: 10px !important;
+  }
+  #loan-tbl {
+    border: 0;
+  }
+  #loan-tbl thead {
+    display: none;
+  }
+  #loan-tbl tr {
+    margin-bottom: 10px;
+    display: block;
+    border-bottom: 2px solid #ddd;
+    background-color: #fff;
+  }
+  #loan-tbl td {
+    display: block;
+    text-align: right;
+    font-size: 13px;
+    border-bottom: none;
+  }
+  #loan-tbl td:before {
+    content: attr(data-label);
+    float: left;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .loan-tbl-mob {
+    margin: 0 !important;
+    text-align: center !important;
+    float: none !important;
+  }
+  .mob-flot-none {
+    float: none;
+  }
+  .header-btn {
+    margin: 0 auto;
+    display: table;
+  }
+}
+@media only screen and (min-width: 411px) and (max-width: 580px) {
+  .chat-box {
+    width: 93%;
+    float: left;
+  }
+  .chat-arrbox {
+    float: left;
+    width: 7%;
+  }
+}
+@media only screen and (min-width: 336px) and (max-width: 360px) {
+  .help-headtext1 {
+    right: 49px;
+    top: 11px;
+    line-height: 16px;
+  }
+}
+@media only screen and (min-width: 320px) and (max-width: 335px) {
+  .help-headtext1 {
+    right: 42px;
+    top: 13px;
+    line-height: 13px;
+  }
+}
+@media only screen and (min-width: 0px) and (max-width: 410px) {
+  .chat-box {
+    width: 100%;
+    float: left;
+  }
+  .chat-arrbox {
+    float: left;
+    width: 12%;
+  }
+}

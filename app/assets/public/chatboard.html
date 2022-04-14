@@ -1,0 +1,369 @@
+
+
+<section style="margin-bottom: 0;padding-top: 17px;" ng-show="!isStart" id="teaser_view_section">
+    <div class="main-sec">
+        <div class="chat_board">
+            <div class="teaser_box" id="teaserBoxView">
+                <div class="teaser_header" id="closeTeaserScreen">
+                    <div class="teaser_logo">
+                        <img src="app/assets/images/svg/center_logo_start_chat.svg" alt="nelnet" />
+                    </div>
+                    <div class="teaser_head_icon display_flex mr10">
+                        <button ng-if="!$root.screen" title="Full Screen" type="button" class="display_flex full-screen"
+                            class="full-screen" aria-label="full screen">
+                            <i class="icon-full-screen"></i>
+                        </button>
+                        <button title="Mini Screen" ng-if="$root.screen" type="button" class="display_flex min-screen"
+                            aria-label="mini screen">
+                            <i class="icon-mini-screen"></i>
+                        </button>
+                        <button title="Menu" type="button" class="display_flex menu" aria-label="menu">
+                            <i class="icon-menu"></i>
+                        </button>
+                        <button title="Close" type="button" class="display_flex close-btn" aria-label="close">
+                            <i class="icon-close"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="teaser_body">
+                    <h5>Hi, I'm Bailey,</h5>
+                    <p><b>your Nelnet Campus Commerce digital assistant.</b></p>
+                    <p>If you have questions, I have answers.</p>
+                </div>
+                <div class="teaser_footer">
+                    <div class="display_flex content_space">
+                        <div class="msg_start_lbl">
+                            <button style="font-weight: 500" ng-click="startConversation()" id="myChatStart"
+                                aria-label="start chat">Start Chat</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="chat_btn_icon" style="display: none;">
+                <button type="button" clsss="custom_chat_btn" aria-label="chat widget"><img
+                        src="app/assets/images/svg/chat.svg" alt="chat widget"></button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="ErrorHandlerDiv" style="display: none;"><input type="hidden" id="errormessage" name="errormessage"></div>
+
+
+
+
+<section ng-class="{'section-space202':!$root.screen}" style="margin-bottom: 0;
+    padding-bottom: 0;" class="main-sec" fullscreen="isFullscreen" ng-style="chatbox" id="chatbox" ng-show="isStart">
+    <div id="c" class="chatWindowBox">
+        <div style="padding-bottom: 0; border-radius: 13px;overflow: hidden; border: 1px solid #3A7C2C;box-shadow: 0 0 10px rgba(0, 0, 0, .15);">
+            <div class="chatbox_teaser_header just-spacebeetwen" style="border-radius: 10px 12px 0 0;">
+                <div class="chatbox_teaser_logo">
+                    <span class="bot-img"><img src="app/assets/images/svg/chat-view-logo.jpg" alt="nelnet" /></span>
+                </div>
+                <div class="chatbox_teaser_head_icon">
+                    <button title="Full Screen" ng-show="!fullView && !mobileDevice" id="fullScreenBtn" type="button"
+                        class="display_flex" ng-click="chatBotFullScreen()" aria-label="full screen">
+                        <i class="icon-full-screen"></i>
+                    </button>
+                    <button title="Mini Screen" ng-show="fullView" id="exitfullScreenBtn" type="button"
+                        class="display_flex" ng-click="exitchatBotfullScreen()" aria-label="mini screen">
+                        <i class="icon-mini-screen"></i>
+                    </button>
+                    <div class="more_drp_dwn dropdown">
+                        <button title="Menu" type="button" class="display_flex dropdown-toggle" id="menu1"
+                            data-toggle="dropdown" aria-label="menu">
+                            <i class="icon-menu"></i>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1" style="cursor: pointer;">
+                            <li ng-click="download()" role="presentation" id="saveTransript"><a href="javascript:;"
+                                    role="menuitem" tabindex="-1"><span><i class="icon-savechat"></i></span>Save
+                                    Transcript</a></li>
+                            <li ng-click="endSession()" id="endchatclick" role="presentation"><a href="javascript:;"
+                                    role="menuitem" tabindex="-1"><span style="display: flex;align-items: center;"><i
+                                            class="icon-endchat"></i></span>End Chat</a></li>
+                        </ul>
+                    </div>
+                    <button title="Close" type="button" ng-click="closeMiniView()" id="closeMiniView"
+                        class="display_flex close-btn" aria-label="close">
+                        <i class="icon-close"></i>
+                    </button>
+                </div>
+            </div>
+            <div ng-class="{'chatbot-gradient' : !$root.screen}" class="main-sec chatbot-white  height-full"
+                tabindex='1' id="chatf">
+                <div ng-show="!sessionEnded" id="offSet"
+                    ng-class="$root.screen?'col-lg-12 col-md-12':'col-lg-12 col-md-12'"
+                    class=" col-sm-12 col-xs-12 padding0">
+                    <div class="text-center section-title">
+                        <!-- section title start-->
+                        <div ng-style="myScroll" style="height: calc(100vh - 148px);"
+                            class="main-sec chatwindow chat-height smooth-scroll messagecontainer" id="style-4"
+                            role="log">
+                            <div class="connect-box" ng-if="connecting">
+                                <span style="color:#374380" class="connect-load">Connecting</span>
+                                <div class="spinner">
+                                    <div class="bounce1 bubble-color"></div>
+                                    <div class="bounce2 bubble-color"></div>
+                                    <div class="bounce3 bubble-color"></div>
+                                </div>
+                            </div>
+                            <audio id="chatNewMessage" preload="auto">
+                                <source src="app/assets/audio/chat_new_message.mp3">
+                                </source>
+                            </audio>
+
+                            <div class=" margin-top-1 message clearfix" ng-repeat="message in messages">
+                                <div ng-if="message.from=='me' && message.type != 'endOfConversation' && message.message"
+                                    ng-class="{'full-stext-right' : $root.screen}"
+                                    class="col-lg-1 col-md-1 col-xs-2 col-sm-1 mob-padd-left0 padding0 tabmarg-t5 center-img-icon">
+                                    <img style="max-width: 81%;" src="app/assets/images/svg/center_logo.svg"
+                                        class="chat_icn" alt="{{botName}}" />
+                                </div>
+
+                                <div ng-if="message.from=='me' && !message.items && !message.title && !message.buttons && !message.facts && message.type != 'endOfConversation' && message.message"
+                                    class="col-lg-9 mob-padd-left0 col-md-10 col-xs-10 col-sm-11">
+                                    <div ng-class="message.class" ng-bind-html="message.message">
+                                    </div>
+                                </div>
+
+                                <!-- For Comment Box -->
+                                <div ng-if="message.from=='me' && !message.items && message.title && message.title=='commentbox' && !message.buttons && !message.facts && message.type != 'endOfConversation' && message.message"
+                                    class="col-lg-9 mob-padd-left0 col-md-10 col-xs-10 col-sm-11">
+                                    <div ng-class="message.class" ng-bind-html="message.message">
+                                    </div>
+                                    <div class="chat-comment-box">
+                                        <div class="text-area">
+                                            <span id="chars">255</span>
+                                            <textarea rows="3" class="custom-scroll textarea" id="commentbox" aria-label="Comment Box"
+                                                maxlength="255"></textarea>
+                                        </div>
+                                        <input type="submit" id="commentboxsubmit" disabled='disabled' value="Submit" aria-label="Comment Box Submit"
+                                            ng-click="sendmessageOnSubmitclick('commentbox')">
+                                        <input type="submit" id="commentboxcancel" value="Cancel" aria-label="Comment Box Cancel"
+                                            ng-click="sendmessageOnCancelCommentclick('commentbox')">
+                                    </div>
+                                </div>
+
+                                <!-- For Continue Button with message-->
+                                <div ng-if="message.from=='me' && !message.items && message.title && message.title=='showcontinuebtn' && !message.buttons && !message.facts && message.type != 'endOfConversation' && message.message"
+                                    class="col-lg-9 mob-padd-left0 col-md-10 col-xs-9 col-sm-11 ng-scope">
+                                    <div ng-class="message.class" class="clearfix" ng-bind-html="message.message">
+                                    </div>
+                                    <div class="question-msg-btn">
+                                        <div class="my-balance ng-scope">
+                                            <button ng-click="ContinueNextMessage()" class="question-btns disable-btn ng-binding"
+                                                aria-label="continue">Continue Chat</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- For Continue Button without message-->
+                                <div ng-if="message.from=='me' && message.title=='showcontinuebtn' && !message.message"
+                                class="col-lg-1 col-md-1 col-xs-2 col-sm-1 mob-padd-left0 padding0"></div>
+                                <div ng-if="message.from=='me' && !message.items && message.title && message.title=='showcontinuebtn' && !message.buttons && !message.facts && message.type != 'endOfConversation' && !message.message"
+                                    class="col-lg-9 mob-padd-left0 col-md-10 col-xs-9 col-sm-11 ng-scope">
+                                    <div class="question-msg-btn">
+                                        <div class="my-balance ng-scope">
+                                            <button ng-click="ContinueNextMessage()" class="question-btns ng-binding disable-btn"
+                                               aria-label="continue">Continue Chat</button> 
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div ng-if="message.from=='me' && message.buttons && !message.facts"
+                                    class="col-lg-9 mob-padd-left0 col-md-10 col-xs-9 col-sm-11">
+                                    <div ng-class="message.class" class="clearfix" ng-bind-html="message.message">
+                                    </div>
+                                    <div class="question-msg-btn buttonslist">
+                                        <div class="my-balance" ng-repeat="button in message.buttons">
+                                            <button ng-if="!button.linktoSend" ng-click="sendmessageOnButtonclick(button.title, $event)" class="question-btns disable-btn"
+                                                aria-label="{{button.title}}">{{button.title}}</button>
+                                            <a ng-if="button.linktoSend" ng-href="{{button.linktoSend}}" ng-click="sendmessageOnButtonclick(button.title, $event)" target="_blank" class="question-btns link-action-btns disable-btn-a"
+                                                aria-label="{{button.title}}" ng-bind-html="button.title"></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div ng-if="message.from=='me' && !message.items && !message.buttons && !message.facts && message.title == 'fsalink' && message.message"
+                                    class="col-lg-9 mob-padd-left0 col-md-10 col-xs-10 col-sm-11">
+                                    <div ng-class="message.class" ng-bind-html="message.message">
+                                    </div>
+                                    <div class="question-msg-btn">
+                                        <div class="my-balance">
+                                            <a ng-href="{{message.buttonUrl}}" onclick="FsaLinkClick()" target="_blank" class="question-btns fsabutton" aria-label="Apply for IDR Now.">Apply for IDR Now.</a></div>
+                                    </div>
+                                </div>
+
+                                <!-- Start Button with Link -->
+                                <div ng-if="message.from=='me' && !message.items && !message.buttons && !message.facts && message.title == 'buttonwithlink' && message.message"
+                                    class="col-lg-9 mob-padd-left0 col-md-10 col-xs-10 col-sm-11">
+                                    <div ng-class="message.class" ng-bind-html="message.message">
+                                    </div>
+                                    <div class="question-msg-btn">
+                                        <div class="my-balance">
+                                            <a ng-href="{{message.link}}" target="_blank" class="question-btns fsabutton" aria-label="{{messages.text}}">{{message.text}}</a></div>
+                                    </div>
+                                </div>
+                                <!-- END Button with Link -->
+
+                                <!-- Start Screen Grabs -->
+                                <div ng-if="message.from=='me' && !message.items && !message.buttons && !message.facts && message.title == 'showscreengrab' && message.message">
+                                    <div class="col-lg-9 mob-padd-left0 col-md-10 col-xs-10 col-sm-11">
+                                        <div ng-class="message.class" ng-bind-html="message.message">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="grabe-image-row">
+                                        <div class="col-lg-1 col-md-1 col-xs-2 col-sm-1 mob-padd-left0 padding0 tabmarg-t5 center-img-icon ng-scope">
+                                            <img style="max-width: 81%;" src="app/assets/images/svg/center_logo.svg" class="chat_icn" alt="Sloan">
+                                        </div>
+                                        <div class="col-lg-9 mob-padd-left0 col-md-10 col-xs-10 col-sm-11">
+                                    
+                                            <div class="msg-body zoom-img">
+                                                <div class="show-img">
+                                                    <a href="javascript:void(0)" ng-click="ShowScreenGrab(message.link)">
+                                                        <div class="view-img"><img src="app/assets/images/svg/search.svg"></div>
+                                                    </a>
+                                                    <img ng-src="{{message.link}}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- In case of Multiple Images -->
+                                    <div class="grabe-image-row" ng-if="message.link1">
+                                        <div class="col-lg-1 col-md-1 col-xs-2 col-sm-1 mob-padd-left0 padding0 tabmarg-t5 center-img-icon ng-scope">
+                                            <img style="max-width: 81%;" src="app/assets/images/svg/center_logo.svg" class="chat_icn" alt="Sloan">
+                                        </div>
+                                        <div class="col-lg-9 mob-padd-left0 col-md-10 col-xs-10 col-sm-11">
+                                    
+                                            <div class="msg-body zoom-img">
+                                                <div class="show-img">
+                                                    <a href="javascript:void(0)" ng-click="ShowScreenGrab(message.link1)">
+                                                        <div class="view-img"><img src="app/assets/images/svg/search.svg"></div>
+                                                    </a>
+                                                    <img ng-src="{{message.link1}}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- END Screen Grabs -->
+
+                                <div ng-if="message.from=='me' && message.type == 'endOfConversation' && message.showContinueBtn"
+                                    class="col-lg-1 col-md-1 col-xs-2 col-sm-1 mob-padd-left0 padding0"></div>
+                                <div ng-if="message.from=='me' && message.type == 'endOfConversation' && message.showContinueBtn"
+                                    class="col-lg-9 mob-padd-left0 col-md-10 col-xs-9 col-sm-11 ng-scope">
+                                    <div class="question-msg-btn">
+                                        <div class="my-balance ng-scope">
+                                            <button ng-click="showFeedbackScreen()" class="question-btns ng-binding"
+                                                id="continueBtn" aria-label="continue">End Chat</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div ng-if="message.from=='you'" class="col-lg-12">
+                                    <div ng-class="message.class" ng-bind-html="message.message"></div>
+                                </div>
+                            </div>
+                            <div ng-if="botprocessing" class="margin-top-1 clearfix message chat-typeing"
+                                style="margin-bottom: 10px;">
+                                <div ng-class="{'full-stext-right' : $root.screen}"
+                                    class="col-lg-1 col-md-1 col-xs-2 col-sm-1 mob-padd-left0 padding0 tabmarg-t5 center-img-icon">
+                                    <img src="app/assets/images/svg/center_logo.svg" class="loader-logo" alt="{{botname}}" />
+                                </div>
+                                <div class="col-lg-9 mob-padd-left0 col-md-10 col-xs-10 col-sm-11">
+                                    <div class="bubble me">
+                                        <div id="wave">
+                                            <span class="dot1"></span>
+                                            <span class="dot1"></span>
+                                            <span class="dot1"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.section title start-->
+                        <div class="main-sec margin-top-1">
+
+                            <div class="col-xs-12 pad-r-n padding0" ng-class="{'col-lg-10' : $root.screen}">
+                                <div ng-class="" class="chat-box " style="position: relative;"
+                                    ng-class="{'chat-boxlg' : $root.screen}">
+                                    <div class="main-sec">
+                                        <label for="textmessage" class="lbltextmessage">Start Typing</label>
+                                        <input type="text" name="text" ng-if="isIE" id="textmessage" autocomplete="off"
+                                            ng-keyup="speakKey()" ng-enter="sendMessage()" ng-model="$root.message"
+                                            class="form-control margin-bottom-none chat-type" aria-label="Message"
+                                            placeholder="Start Typing" style="padding-right: 35px;" />
+                                        <input type="text" name="text" ng-if="!isIE" id="textmessage" autocomplete="off"
+                                            ng-keyup="speakKey()" ng-enter="sendMessage()" ng-model="$root.message"
+                                            class="form-control margin-bottom-none chat-type" aria-label="Message"
+                                            placeholder="Start Typing" style="padding-right: 114px;" />
+                                    </div>
+                                    <div class="textmessagebtns">
+                                        <a ng-show="!volume && !isIE" title="Unmute" ng-click="startVolume()"
+                                            href="javascript:;" type="submit" class="chat-volume-btn"
+                                            id="startVolumeBtn">
+                                            <i class="icon-mute"></i>
+                                        </a>
+                                        <a ng-show="volume && !isIE" title="Mute" ng-click="stopVolume()"
+                                            href="javascript:;" type="submit" class="chat-volume-btn"
+                                            id="stopVolumeBtn">
+                                            <i class="icon-unmute"></i>
+                                        </a>
+                                        <audio id="micstart" preload="auto">
+                                            <source src="app/assets/audio/micstart.mp3">
+                                            </source>
+                                        </audio>
+                                        <a href="javascript:;" title="Mic" ng-if="!ismic && !isIE" type="submit"
+                                            ng-click="start()" class="chat-microbtn2" id="microPhoneBtn">
+                                            <i class="icon-microphone-mute" alt="Mic" style="line-height: 44px;"></i>
+                                        </a>
+
+                                        <a href="javascript:;" ng-if="ismic && !isIE" type="submit"
+                                            class="chat-microbtn1">
+                                            <i class="icon-microphone"></i>
+                                        </a>
+                                        <button title="Send Message" ng-click="sendMessage()" type="submit"
+                                            class="chat-sendbtn" aria-label="send message" id="sendbtn">
+                                            <i class="icon-sned"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <!--chat-box-->
+                            </div>
+                            <!--lg-10-->
+                            <!--botm-chat-->
+                        </div>
+                    </div>
+                </div>
+                <!--bg-- white-->
+                <div ng-show="sessionEnded" class="session_endbox" id="style-4">
+                    <div class="session_end_text">
+                        <h5>This session has ended.</h5>
+                        <div class="session_end_text">
+                            <button ng-click="download()" id="endchattranscriptbutton" class="btn trnscript_btn"
+                                aria-label="Need a transcript? (Download)"><span><i class="icon-savechat save-transcript-icon"></i></span>Need
+                                a transcript?</button>
+                        </div>
+                        <p><span style="color: #565B64;">Thank you for chatting with me.</span></p>
+                        <div class="session_end_text">
+                            <button ng-click="EndChatToRestart()" id="endchatendbutton" class="btn trnscript_btn endchatendbutton" aria-label="Restart Conversation">End Chat</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade customalert-alert" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="alert"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body customalert-body">
+                        <p id="alertMessage"></p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success customalert-accept" data-dismiss="modal">Ok</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>

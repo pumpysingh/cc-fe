@@ -1,0 +1,307 @@
+
+:focus
+{
+    outline: none;
+}
+
+.height-full
+{
+    /*height: 106vh;*/
+}
+
+.bg-nrp
+{
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.padtb-20
+{
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+
+.date-tb
+{
+    color: #778191;
+    font-size: 16px;
+    margin-top: 3px;
+}
+
+.loan-titledate
+{
+    font-weight: 600;
+    color: #616161;
+    padding: 5px 13px;
+    background-color: #feffef;
+    border-radius: 3px;
+    font-size: 16px;
+    margin: 8px 0;
+}
+
+.font-16
+{
+    font-size: 16px;
+}
+
+.bubble-xander {
+
+    top:35px ! important;
+}
+
+.chat-box1
+{
+
+    width: 88% !important;
+    float: left;
+}
+
+
+.scrollHide{
+    background-repeat: no-repeat !important;
+    background-attachment: fixed !important;
+}
+
+.scrollHide2{
+    overflow-y: hidden;
+}
+
+
+.scrollHidenot{
+
+    overflow-y: auto;
+}
+
+
+.ht-height
+{
+    height: 100%;
+}
+
+.chat-height {
+    /* height: 470px; */
+    height: calc(100vh - 13em);
+   
+}
+
+.pop-box
+{
+    background-color: #e2f0ff;
+    padding: 20px 0;
+    border: 1px dashed #9db3ca;
+}
+
+
+.popup-text
+{
+    margin-top: 10px;
+    margin-bottom:  0;
+    font-size:  18px;
+    color: #15549a;
+    font-weight: 500;
+}
+
+
+.popup-sectext
+{
+    margin-top: 5px;
+    color: #4d6069;
+    font-size: 14px;
+    line-height:  18px;
+    padding:  0 8px;
+    font-weight: 500;
+    margin-bottom: 0;
+}
+
+.chat-type {
+    font-size: 16px;
+}
+
+
+.smooth-scroll
+{
+    overflow-y: auto; 
+   
+}
+
+.chat-volume
+{
+    position: absolute;
+    right: 103px;
+    padding: 13px 15px;
+    line-height: 15px;
+    bottom: 4px;
+    top: 4px;
+}
+
+.chat-volume:hover
+{
+    background-color: #e8f3ff;
+}
+
+.chat-backarrow:hover {
+    -webkit-transition: all 0.3s ease-in;
+    -moz-transition: all 0.3s ease-in;
+    transition: all 0.3s ease-in;
+    }
+
+
+    .me, .you {
+       
+        text-align: justify !important;
+    }
+
+
+
+    .padding-btm-15
+{
+    padding-bottom: 15px;
+}
+
+
+
+.chat-arrboxlg
+{
+
+    float: left;
+    width: 5%;
+}
+
+
+.chat-boxlg {
+
+    float: left;
+    width: 95%;
+}
+
+.smooth-scroll
+{
+    overflow-x: hidden;
+}
+.psflName
+{
+    right: 53px !important;
+    top: 24px !important;
+}
+
+.btn
+{ 
+    line-height: 18px;;
+}
+
+
+
+#card-tbl > .table-bordered > tbody > tr > td {
+   padding: 6px !important;
+}
+
+
+#card-tbl > .table-bordered > thead > tr > th {
+   
+    padding: 6px !important;
+}
+
+
+
+[ng\:cloak], [ng-cloak], .ng-cloak { display: none; }
+
+
+
+
+
+/*----------------------------media---------------------------*/
+
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+
+    .tab-mrgbt-0
+    {
+        margin-bottom: 0;
+    }
+
+    .tabmarg-t5
+    {
+        margin-top: 5px;
+
+    }
+
+}
+
+
+
+@media only screen and (min-width: 0px) and (max-width: 767px) {
+    .mob-ttlamnt {
+        float: left !important;
+        font-size: 16px;
+        margin-top: 5px;
+
+    }
+
+    .mob-fltleft
+    {
+        float: left !important;
+    }
+
+
+    .chat-microbtn2
+    {
+        right: 45px !important;
+    }
+
+    .chat-microbtn1
+    {
+        right: 45px !important;
+    }
+
+
+.chat-sendbtn {
+
+    padding: 10px 10px !important;
+}
+
+
+.wrapper-content {
+    margin-bottom: 20px;
+}
+
+.mob-center
+{
+    text-align: center;
+}
+
+
+#card-tbl table {
+
+    margin-bottom: 10px;
+}
+
+.smooth-scroll
+{
+    overflow-y: auto !important; 
+   -webkit-overflow-scrolling:touch;
+}
+
+
+.padd-l-0
+{
+    padding-left: 15px;
+}
+
+
+.chat-backarrow:hover {
+    background-color: #60acff;
+    -webkit-transition: all 0.3s ease-in;
+    -moz-transition: all 0.3s ease-in;
+    transition: all 0.3s ease-in;
+    }
+
+
+
+
+
+
+
+}
+
+

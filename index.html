@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="prestosolvoApp" ng-class="{'ht-height':$root.screen}">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Expires" content="Sat, 01 Dec 2001 00:00:00 GMT">
+    <meta http-equiv="X-UA-Compatible" content="IE=11">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title ng-bind="$root.psflTitle">HE Chatbot</title>
+    <link rel="shortcut icon" type="image/png" href="app/assets/images/favicon.png" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <!-- <link href="app/assets/css/fontello.css" rel="stylesheet"> -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700|Merriweather:300,300i,400,400i,700,700i"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/offline-js/0.7.19/themes/offline-theme-default.min.css" integrity="sha512-6Ta/IAE9flMxhQc097grLm0ClazXdkdHp/ulKgSedLy2XMf5A6KI+IYbkbGPbnwbb0w3dYfGDv0QlJpXqhw9+Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/offline-js/0.7.19/themes/offline-language-english.min.css" integrity="sha512-8R9OSQ50m6elUBPlji1o6tcoz+FmURyF8cWCuanADxl5GjoSFrB9aATpYpMGtgz4EBQj1gku3qMb0zZf2gF/rQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />    
+    <script>
+        var dataLayer = dataLayer || [];
+    </script>
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({
+                "gtm.start": new Date().getTime(), event: 'gtm.js'
+            })
+            var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-NZX9MKR');
+    </script>
+</head>
+
+<body style="background-color: transparent;" class="iframebody"
+    ng-class="{ 'scrollHide scrollHidenot chatbot-gradient':$root.screen }">
+    <div ui-view="chat" autoscroll="false"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/offline-js/0.7.19/offline.min.js" integrity="sha512-KTivTC9CKUCyHiWM0wIqmkGMlMPREqaQlPIXcEMzza3fceLHnyuzJ00VSRw75TUXQE80MmugpySjAVu75S+bNg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        // check for browser support
+        if (window.addEventListener) {
+
+            var baseUrl = window.location.protocol + '//' + window.location.host;
+            var websiteOrigin = baseUrl;
+            var parentUrl = document.referrer;
+            if (parentUrl != null && parentUrl != undefined && parentUrl != "") {
+                var parentDomain = parentUrl.match(/:\/\/(.[^/]+)/)[1];
+                var pathArray = parentUrl.split('/');
+                var protocol = pathArray[0];
+                websiteOrigin = protocol + "//" + parentDomain;
+            }
+
+            var forlocalhostrun = "http://localhost";
+
+            $(".iframebody").delegate(".ErrorHandlerDiv", "click", function (event) {
+                var errormessage = $('#errormessage').val();
+                if (errormessage == true || errormessage == "true") {
+                    msg = {
+                        'task': 'hideChatBot'
+                    };
+                    parent.postMessage(msg, websiteOrigin);
+                }
+                else {
+                    msg = {
+                        'task': 'showChatBot'
+                    };
+                    parent.postMessage(msg, websiteOrigin);
+                }
+            });
+
+            // message handler for cross origin
+            window.addEventListener('message', function (e) {
+                // check message origin
+                if (e.origin === forlocalhostrun || e.origin === websiteOrigin) {
+                    var task = e.data['task']; // task received in postMessage
+                    var msg; // for postMessage reply to e.source 
+                    switch (task) { // postMessage tasks
+                        // iframe load event - register events
+                        case 'init':
+                            var data = {
+                                'event': 'chatEvent',
+                                'botCategory': 'chat',
+                                'botAction': 'impression'
+                            };
+                            dataLayer.push(data);
+                            $(".iframebody").delegate("#myChatStart", "click", function () {
+                                msg = { 'task': 'start' };
+                                var data = {
+                                    'event': 'chatEvent',
+                                    'botCategory': 'chat',
+                                    'botAction': 'fe_start'
+                                };
+                                dataLayer.push(data);
+                                e.source.postMessage(msg, e.origin);
+                            });
+                            $(".iframebody").delegate("#endchatendbutton", "click", function () {
+                                msg = { 'task': 'endchatendbutton' };
+                                e.source.postMessage(msg, e.origin);
+                            });
+                            $(".iframebody").delegate("#endchattranscriptbutton", "click", function () {
+                                msg = { 'task': 'saveTransript' };
+                                e.source.postMessage(msg, e.origin);
+                            });
+                            $(".iframebody").delegate("#fullScreenBtn", "click", function () {
+                                msg = { 'task': 'fullScreenBtn' };
+                                var data = {
+                                    'event': 'chatEvent',
+                                    'botCategory': 'chat',
+                                    'botAction': 'fullscreen'
+                                };
+                                dataLayer.push(data);
+                                e.source.postMessage(msg, e.origin);
+                            });
+                            $(".iframebody").delegate("#exitfullScreenBtn", "click", function () {
+                                msg = { 'task': 'exitfullScreenBtn' };
+                                e.source.postMessage(msg, e.origin);
+                            });
+                            $(".iframebody").delegate("#closeTeaser", "click", function () {
+                                msg = { 'task': 'closeTeaser' };
+                                var data = {
+                                    'event': 'chatEvent',
+                                    'botCategory': 'chat',
+                                    'botAction': 'close'
+                                };
+                                dataLayer.push(data);
+                                e.source.postMessage(msg, e.origin);
+                            });
+                            $(".iframebody").delegate("#closeTeaserScreen", "click", function () {
+                                msg = { 'task': 'closeTeaser' };
+                                var data = {
+                                    'event': 'chatEvent',
+                                    'botCategory': 'chat',
+                                    'botAction': 'close'
+                                };
+                                dataLayer.push(data);
+                                e.source.postMessage(msg, e.origin);
+                            });
+                            $(".iframebody").delegate("#closeMiniView", "click", function () {
+                                msg = { 'task': 'closeMiniView' };
+                                var data = {
+                                    'event': 'chatEvent',
+                                    'botCategory': 'chat',
+                                    'botAction': 'close'
+                                };
+                                dataLayer.push(data);
+                                e.source.postMessage(msg, e.origin);
+                            });
+                            $(".iframebody").delegate("#startVolumeBtn", "click", function () {
+                                var data = {
+                                    'event': 'chatEvent',
+                                    'botCategory': 'chat',
+                                    'botAction': 'unmute'
+                                };
+                                dataLayer.push(data);
+                                msg = { 'task': 'startVolumeBtn' };
+                                e.source.postMessage(msg, e.origin);
+                            });
+                            $(".iframebody").delegate("#stopVolumeBtn", "click", function () {
+                                var data = {
+                                    'event': 'chatEvent',
+                                    'botCategory': 'chat',
+                                    'botAction': 'mute'
+                                };
+                                dataLayer.push(data);
+                                msg = { 'task': 'stopVolumeBtn' };
+                                e.source.postMessage(msg, e.origin);
+                            });
+                            $(".iframebody").delegate("#microPhoneBtn", "click", function () {
+                                var data = {
+                                    'event': 'chatEvent',
+                                    'botCategory': 'chat',
+                                    'botAction': 'microphone'
+                                };
+                                dataLayer.push(data);
+                                msg = { 'task': 'microPhoneBtn' };
+                                e.source.postMessage(msg, e.origin);
+                            });
+                            $(".iframebody").delegate("#saveTransript", "click", function () {
+                                var data = {
+                                    'event': 'chatEvent',
+                                    'botCategory': 'chat',
+                                    'botAction': 'save transcript'
+                                };
+                                dataLayer.push(data);
+                                msg = { 'task': 'saveTransript' };
+                                e.source.postMessage(msg, e.origin);
+                            });
+                            $(".iframebody").delegate("#endchatclick", "click", function () {
+                                var data = {
+                                    'event': 'chatEvent',
+                                    'botCategory': 'chat',
+                                    'botAction': 'end button'
+                                };
+                                dataLayer.push(data);
+                                msg = { 'task': 'endchatclick' };
+                                e.source.postMessage(msg, e.origin);
+                            });
+                            $(".iframebody").delegate("#continueBtn", "click", function () {
+                                var data = {
+                                    'event': 'chatEvent',
+                                    'botCategory': 'chat',
+                                    'botAction': 'end flow'
+                                };
+                                dataLayer.push(data);
+                                msg = { 'task': 'continueBtn' };
+                                e.source.postMessage(msg, e.origin);
+                            });
+                            $(".iframebody").delegate("#fsalinkclick", "click", function () {
+                                var data = {
+                                    'event': 'userClickEvent',
+                                    'botCategory': 'Exit',
+                                    'botAction': 'FSA'
+                                };
+                                dataLayer.push(data);
+                                msg = { 'task': 'fsalinkclick' };
+                                e.source.postMessage(msg, e.origin);
+                            });
+                            break;
+                        case 'triggermenu1click':
+                            var attributeval = $("#menu1").attr('aria-expanded');
+                            if (attributeval == true || attributeval == "true") {
+                                $("#menu1").trigger('click');
+                            }
+                            break;
+                        case 'triggermychatstartclick':
+                            $("#myChatStart").trigger('click');
+                            break;
+                        case 'reloadiframe':
+                            document.location.reload(true);
+                            break;
+                        case 'OpenChatWidget':
+                            var data = {
+                                'event': 'chatEvent',
+                                'botCategory': 'chat',
+                                'botAction': 'open'
+                            };
+                            dataLayer.push(data);
+                            document.getElementById('myChatStart').focus();
+                            document.getElementById('textmessage').focus();
+                            msg = { 'task': 'OpenChatWidget' };
+                            e.source.postMessage(msg, e.origin);
+                            break;
+                        //default:
+                    }
+                }
+            }, false);
+        }
+
+        var maxLength = 255;
+        $(".iframebody").delegate("#commentbox", "keyup", function () {
+            var textlength = $('#commentbox').val().length;
+            var length = maxLength - textlength;
+            $('#chars').text(length);
+            if (textlength > 0) {
+                $('#commentboxsubmit').prop('disabled', false);
+            }
+            else{
+                $('#commentboxsubmit').prop('disabled', true);
+            }
+        });
+
+        function SendErrorToGTM(error) {
+            var data = {
+                'event': 'chatEvent',
+                'botCategory': 'chat',
+                'botAction': 'error',
+                'botLabel': error
+            };
+            try {
+                window.parent.dataLayer.push(data);
+            }
+            catch (err) {
+
+            }
+        }
+
+        function hideChatWindow() {
+            try {
+                if (!window.parent.document.getElementById('chatIcon').classList.contains("display_none")) {
+                    window.parent.document.getElementById('chatIcon').classList.add("display_none");
+                }
+                if (!window.parent.document.getElementById('chatBotView').classList.contains("display_none")) {
+                    window.parent.document.getElementById('chatBotView').classList.add("display_none");
+                }
+                if (window.parent.document.getElementById('chatDiv').classList.contains('teaser_view_active')) {
+                    window.parent.document.getElementById('chatDiv').classList.remove('teaser_view_active');
+                }
+            }
+            catch (err) {
+                $('#errormessage').val(true);
+                $('.ErrorHandlerDiv').trigger('click');
+            }
+        }
+
+        function showChatWindow() {
+            try {
+                window.parent.document.getElementById('chatBotView').style.display = '';
+                window.parent.document.getElementById('chatIcon').style.display = '';
+                if (window.parent.document.getElementById('chatIcon').classList.contains("display_none")) {
+                    window.parent.document.getElementById('chatIcon').classList.remove("display_none");
+                }
+                if (window.parent.document.getElementById('chatBotView').classList.contains("display_none")) {
+                    window.parent.document.getElementById('chatBotView').classList.remove("display_none");
+                }
+                if (!window.parent.document.getElementById('chatDiv').classList.contains('teaser_view_active') && !(window.parent.document.getElementById('myChat').classList.contains('display_none') || window.parent.document.getElementById('myChat').style.display == 'none')) {
+                    window.parent.document.getElementById('chatDiv').classList.add('teaser_view_active');
+                }
+            }
+            catch (err) {
+                $('#errormessage').val(false);
+                $('.ErrorHandlerDiv').trigger('click');
+            }
+        }
+
+        function FsaLinkClick() {
+            var data = {
+                'event': 'userClickEvent',
+                'botCategory': 'Exit',
+                'botAction': 'FSA'
+            };
+            try {
+                window.parent.dataLayer.push(data);
+            }
+            catch (err) {
+                var msg = {
+                    'task': 'fsalinkclick'
+                };
+                parent.postMessage(msg, websiteOrigin);
+            }
+            document.getElementById('myChatStart').focus();
+            document.getElementById('textmessage').focus();
+        }
+
+        function SendDataLayerOnAPICall(clientID) {
+            var data = {
+                'clientId': clientID
+            };
+            try {
+                window.parent.dataLayer.push(data);
+            }
+            catch (err) {
+
+            }
+            var msg = {
+                'task': 'sendClientID',
+                'clientID': clientID
+            };
+            parent.postMessage(msg, websiteOrigin);
+        }
+
+
+        function ShowScreenGrab(url) {
+            try {
+                window.parent.document.getElementById('screengrabfullview').classList.remove('display_none');
+                window.parent.document.getElementById("ScreenGrabImg").src = url;
+            }
+            catch (err) {
+                var msg = {
+                    'task': 'screengrabfullview',
+                    'url': url
+                };
+                parent.postMessage(msg, websiteOrigin);
+            }
+        }
+
+    </script>
+</body>
+
+</html>
